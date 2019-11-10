@@ -1,0 +1,155 @@
+import { Component, OnInit } from '@angular/core';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {ActivatedRoute} from '@angular/router';
+import {GraphDefinition} from "fhir-stu3";
+import {BrowserService} from "../../services/browser.service";
+import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";
+
+
+
+@Component({
+  selector: 'app-graph-definition-detail',
+  templateUrl: './graph-definition-detail.component.html',
+  styleUrls: ['./graph-definition-detail.component.css']
+})
+export class GraphDefinitionDetailComponent implements OnInit {
+
+  graphid = undefined;
+
+  graph: GraphDefinition;
+
+  data = [ ];
+
+  edges = [];
+
+  force = {
+    // initLayout: 'circular'
+    // gravity: 0
+    repulsion: 100,
+    edgeLength: 300
+  };
+
+
+  constructor(
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private fhirService: BrowserService) { }
+
+  ngOnInit() {
+
+    this.doSetup();
+    this.route.url.subscribe( url => {
+      this.doSetup();
+    });
+  }
+
+  doSetup() {
+
+    const tempid = this.route.snapshot.paramMap.get('graphid');
+    if (tempid !== undefined && tempid !== this.graphid) {
+      this.graphid = tempid;
+
+      this.fhirService.getResource('/GraphDefinition/' + this.graphid ).subscribe( result => {
+        const graph: GraphDefinition = result;
+        this.graph = graph;
+        this.processGraph();
+      });
+    }
+  }
+
+  getColour(resource) {
+    if (resource === 'Bundle') return 'accent';
+    return 'primary';
+  }
+
+  getProfile(profile: string, resource: string) {
+    if (profile !== undefined) return profile;
+    return 'https://www.hl7.org/fhir/stu3/' + resource.toLowerCase() + '.html';
+  }
+
+  processGraph() {
+    this.data = [];
+    this.edges = [];
+    let f = 1;
+
+    this.data.push({
+      id: f.toString(3),
+      name: this.graph.start,
+      symbolSize: 50,
+      itemStyle: {normal: {color: '#c71919'}}
+    });
+    let base = f;
+    f++;
+    if (this.graph.link !== undefined) {
+      this.processItem(base, f, this.graph.link);
+    }
+  }
+  processItem(base, f, links) {
+    for (let link of links) {
+      if (link.target !== undefined) {
+        for (const target of link.target) {
+
+          this.data.push({
+            id: f.toString(),
+            name: target.type,
+            symbolSize: 50,
+            itemStyle: {normal: {color: '#4f19c7'}}
+          });
+          this.edges.push({
+            source: base.toString(),
+            target: f.toString(),
+            label: 'saz'
+          });
+
+          base = f;
+          f++;
+          if (target.compartment !== undefined) {
+            for (const compartment of target.compartment) {
+              this.data.push({
+                id: f.toString(),
+                name: compartment.code,
+                symbolSize: 50,
+                itemStyle: {normal: {color: '#c76919'}}
+              });
+              this.edges.push({
+                source: base.toString(),
+                target: f.toString(),
+                label: 'bob'
+              });
+              f++;
+            }
+          }
+          if (target.link !== undefined) {
+            this.processItem(base, f, target.link);
+          }
+        }
+      }
+
+    }
+    console.log(this.data);
+    console.log(this.edges);
+  }
+
+  view(resource) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: 1,
+      resource: resource
+    };
+    this.dialog.open( ResourceDialogComponent, dialogConfig);
+  }
+
+  getMarkdown(markdown: string): string {
+    //console.log(markdown);
+    if (markdown === undefined) return undefined;
+    markdown = markdown.replace(new RegExp('\\\\n','g'),'\n');
+    //console.log(markdown);
+    return markdown ;
+  }
+
+
+
+}
