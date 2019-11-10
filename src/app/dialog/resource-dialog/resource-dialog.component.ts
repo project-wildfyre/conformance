@@ -1,7 +1,7 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import integer = fhir.integer;
-import {EprService} from "../../service/epr.service";
+
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {BrowserService} from "../../services/browser.service";
 
 declare var $: any;
 
@@ -18,7 +18,7 @@ export class ResourceDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ResourceDialogComponent>,
-    public patientEPRService : EprService,
+    public browserService: BrowserService,
     @Inject(MAT_DIALOG_DATA) data) {
     this.resource = data.resource;
   }
@@ -30,20 +30,10 @@ export class ResourceDialogComponent implements OnInit {
   ngOnInit() {
     console.log('Init Called TREE');
 
-    this.patientEPRService.getResourceChangeEvent().subscribe(
+    this.browserService.getResourceChangeEmitter().subscribe(
       resource => {
         this.resource = resource;
-        /*
-        this.buildNodes();
 
-        $('#docTreeView').jstree('destroy');
-
-        $('#docTreeView').jstree({
-          'core' : {
-            'data' : this.treeData
-          }
-        });
-        */
       }
     )
 

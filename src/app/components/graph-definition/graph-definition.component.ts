@@ -65,11 +65,11 @@ export class GraphDefinitionComponent implements OnInit {
         if (bundle.entry !== undefined) {
           for (const entry of bundle.entry) {
             if (entry.resource.resourceType === 'GraphDefinition') {
-              this.graphs.push(<fhir.GraphDefinition>entry.resource);
+              this.graphs.push(<GraphDefinition>entry.resource);
             }
           }
         }
-        this.dataSource = new GraphDefinitionDataSource(this.fhirService,  this.graphs);
+        this.dataSource = new GraphDefinitionDataSource(this.graphs);
       }
     );
   }

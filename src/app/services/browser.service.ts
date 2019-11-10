@@ -1,22 +1,33 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {OperationOutcome} from "fhir-stu3";
+import {Bundle, OperationOutcome} from "fhir-stu3";
 import {MessageService} from "./message.service";
+
+export enum Formats {
+    JsonFormatted = 'jsonf',
+    Json = 'json',
+    Xml = 'xml',
+    EprView = 'epr'
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class BrowserService {
 
+
   private resource : any;
+
+
+    private format: Formats = Formats.JsonFormatted;
 
   private rawResource : string;
 
   private validation: OperationOutcome;
 
   private config: any = {
-    'baseUrl': 'http://localhost:8186/ccri-fhir/STU3/'
+    'baseUrl': 'http://localhost:8186/ccri-fhir/STU3'
   };
 
   private resourceChange: EventEmitter<any> = new EventEmitter();
@@ -27,9 +38,23 @@ export class BrowserService {
 
   }
 
-  getResource() {
-    return this.resource;
-  }
+    public getResource(search: string): Observable<any> {
+
+        const url = this.config.baseUrl + search;
+        let headers = new HttpHeaders(
+        );
+
+        if (this.format === 'xml') {
+            headers = headers.append('Content-Type', 'application/fhir+xml');
+            headers = headers.append('Accept', 'application/fhir+xml');
+            return this.http.get(url, {headers, responseType: 'blob' as 'blob'});
+        } else {
+            return this.http.get<any>(url, {'headers': this.getHeaders(true)});
+        }
+    }
+
+
+
 
     triggerGetRawResource() {
           return this.getRawResourceChangeEmitter().emit(this.rawResource);
@@ -153,5 +178,18 @@ export class BrowserService {
         }
         return headers;
     }
+    public get(search: string): Observable<Bundle> {
 
+        const url: string = this.config.baseUrl + search;
+        let headers = new HttpHeaders(
+        );
+
+        if (this.format === 'xml') {
+            headers = headers.append('Content-Type', 'application/fhir+xml');
+            headers = headers.append('Accept', 'application/fhir+xml');
+            return this.http.get(url, {headers, responseType: 'blob' as 'blob'});
+        } else {
+            return this.http.get<any>(url, {'headers': headers});
+        }
+    }
 }

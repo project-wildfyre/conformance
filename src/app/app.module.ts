@@ -9,10 +9,19 @@ import { CovalentBaseEchartsModule } from '@covalent/echarts/base';
 import { CovalentBarEchartsModule } from '@covalent/echarts/bar';
 import { CovalentTooltipEchartsModule } from '@covalent/echarts/tooltip';
 import {
-  CovalentCommonModule, CovalentDialogsModule, CovalentExpansionPanelModule,
+  CovalentCommonModule,
+  CovalentDialogsModule,
+  CovalentExpansionPanelModule,
   CovalentFileModule,
-  CovalentJsonFormatterModule, CovalentLayoutModule, CovalentLoadingModule,
-  CovalentMediaModule, CovalentMenuModule, CovalentMessageModule, CovalentNotificationsModule, CovalentStepsModule,
+  CovalentJsonFormatterModule,
+  CovalentLayoutModule,
+  CovalentLoadingModule,
+  CovalentMediaModule,
+  CovalentMenuModule,
+  CovalentMessageModule,
+  CovalentNotificationsModule,
+  CovalentSearchModule,
+  CovalentStepsModule,
   CovalentTabSelectModule
 } from "@covalent/core";
 import {CovalentMarkdownModule} from "@covalent/markdown";
@@ -38,6 +47,8 @@ import {GrapheditorMainComponent} from "./components/grapheditor-main/graphedito
 import {GraphDefinitionDetailComponent} from "./components/graph-definition-detail/graph-definition-detail.component";
 import {GraphDefinitionLinkComponent} from "./components/graph-definition-link/graph-definition-link.component";
 import {GraphDefinitionComponent} from "./components/graph-definition/graph-definition.component";
+import {MatChipsModule} from "@angular/material/chips";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -53,6 +64,8 @@ import {GraphDefinitionComponent} from "./components/graph-definition/graph-defi
     BrowserModule,
     BrowserAnimationsModule,
 
+    FlexLayoutModule,
+
 
     MatIconModule,
     MatListModule,
@@ -65,6 +78,7 @@ import {GraphDefinitionComponent} from "./components/graph-definition/graph-defi
     MatTooltipModule,
     MatRadioModule,
     MatSelectModule,
+      MatChipsModule,
 
 
     CovalentLayoutModule,
@@ -91,6 +105,7 @@ import {GraphDefinitionComponent} from "./components/graph-definition/graph-defi
     CovalentBaseEchartsModule,
     CovalentBarEchartsModule,
     CovalentTooltipEchartsModule,
+    CovalentSearchModule,
     MatSortModule,
   ],
   providers: [

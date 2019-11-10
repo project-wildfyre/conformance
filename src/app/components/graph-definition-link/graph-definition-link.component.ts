@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GraphDefinitionLink} from "fhir-stu3";
+import {Extension, GraphDefinitionLink} from "fhir-stu3";
 
 @Component({
   selector: 'app-graph-definition-link',
@@ -43,6 +43,16 @@ export class GraphDefinitionLinkComponent implements OnInit {
   getProfile(profile: string, resource: string) {
     if (profile !== undefined) return profile;
     return 'https://www.hl7.org/fhir/stu3/' + resource.toLowerCase() + '.html';
+  }
+
+  getParams(events : Extension[]) {
+    for (const extension of events) {
+      if (extension.url == 'http://hl7.org/fhir/4.0/StructureDefinition/extension-GraphDefinition.link.target.params' ) {
+        return extension.valueString;
+      }
+    }
+
+    return "";
   }
 
   getMarkdown(markdown: string): string {

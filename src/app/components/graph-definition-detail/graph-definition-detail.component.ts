@@ -126,8 +126,8 @@ export class GraphDefinitionDetailComponent implements OnInit {
       }
 
     }
-    console.log(this.data);
-    console.log(this.edges);
+   // console.log(this.data);
+   // console.log(this.edges);
   }
 
   view(resource) {

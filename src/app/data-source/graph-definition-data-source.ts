@@ -1,30 +1,31 @@
 import {DataSource} from '@angular/cdk/table';
-import {FhirService} from '../service/fhir.service';
+
 import {BehaviorSubject, Observable} from 'rxjs';
+import {GraphDefinition} from "fhir-stu3";
 
 export class GraphDefinitionDataSource extends DataSource<any> {
-  constructor(public fhirService: FhirService,
-              public graphs: fhir.GraphDefinition[]
+  constructor(
+              public graphs: GraphDefinition[]
   ) {
     super();
   }
 
   private dataStore: {
-    graphs: fhir.GraphDefinition[]
+    graphs: GraphDefinition[]
   };
 
-  connect(): Observable<fhir.GraphDefinition[]> {
+  connect(): Observable<GraphDefinition[]> {
 
   //  console.log('graphs DataSource connect '+this.patientId);
 
-    const _graphs: BehaviorSubject<fhir.GraphDefinition[]> =<BehaviorSubject<fhir.GraphDefinition[]>>new BehaviorSubject([]);
+    const _graphs: BehaviorSubject<GraphDefinition[]> =<BehaviorSubject<GraphDefinition[]>>new BehaviorSubject([]);
 
     this.dataStore = { graphs: [] };
 
 
     if (this.graphs !== []) {
       for (const graph of this.graphs) {
-        this.dataStore.graphs.push(<fhir.GraphDefinition> graph);
+        this.dataStore.graphs.push(<GraphDefinition> graph);
       }
       _graphs.next(Object.assign({}, this.dataStore).graphs);
     }
