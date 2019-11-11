@@ -9,7 +9,8 @@
        fxLayoutGap.xs="0">
     <div class="mat-body-1" fxFlex="75%">
       <b>Path</b>&nbsp;&nbsp; <mat-chip>{{link.path}}</mat-chip>
-
+        <div *ngIf="link.extension !== undefined && getParams(link.extension).length != 0" class="mat-card-content">
+            <b>Params</b>&nbsp;{{getParams(link.extension)}}</div>
     </div>
     <div class="mat-body-1" fxFlex="25%">
 
@@ -23,21 +24,19 @@
         </span>
     </div>
   </div>
-      <div *ngIf="link.extension !== undefined" class="mat-card-content">
-        <b>Params</b>&nbsp;{{getParams(link.extension)}}</div>
+
       <div *ngIf="link.sliceName !== undefined" class="mat-card-content">
           <b>Slice</b> {{link.sliceName}}
       </div>
   <div class="mat-card-content">
       <span *ngIf="link.description != undefined">
-  <b>Description</b> <td-markdown [content]="getMarkdown(link.description)">
+  <td-markdown [content]="getMarkdown(link.description)">
 
   </td-markdown> </span>
   </div>
  <span *ngIf="link.target !== undefined">
     <span *ngFor="let target of link.target">
-        <div *ngIf="target.extension !== undefined" class="mat-card-content">
-            <b>Params</b>&nbsp;<mat-chip>{{getParams(target.extension)}}</mat-chip></div>
+
        <div class="mat-card-content"
             fxLayout
             fxLayout.xs="column"
@@ -53,6 +52,8 @@
              </span>
             </div>
            <div class="mat-body-1" fxFlex="70%">
+               <span *ngIf="target.extension !== undefined && getParams(target.extension).length != 0" class="mat-card-content">
+            <b>Params</b>&nbsp;<mat-chip>{{getParams(target.extension)}}</mat-chip></span>
              <span *ngIf="target.profile !== undefined"><b>Profile</b> {{ target.profile }}</span>
                 <span *ngIf="target.compartment != undefined">
                       <span *ngFor="let compartment of target.compartment">
