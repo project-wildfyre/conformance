@@ -1,11 +1,12 @@
-<td-expansion-panel>
+<td-expansion-panel   (expanded)="expandedEvent()"
+                      (collapsed)="collapsedEvent()">
     <ng-template td-expansion-panel-header>
         <mat-toolbar >
             <mat-toolbar-row>
             <span *ngIf="link.target !== undefined">
                         <span *ngFor="let target of link.target">
                              <span *ngIf="level===0">
-                                     <a mat-raised-button target="_blank"
+                                     <a mat-button target="_blank"
                                         [matTooltip]="getProfile(target.profile, target.type)"
                                         [href]="getProfile(target.profile, target.type)"
                                         [color]="getColour(level)"> {{target.type}}</a>
@@ -18,13 +19,21 @@
               <span *ngIf="link.target !== undefined">
                     <span *ngFor="let target of link.target">
                         &nbsp;
+                         <span *ngIf="target.extension !== undefined && getParams(target.extension).length != 0">
+                                <mat-chip>Params = {{getParams(target.extension)}}</mat-chip> &nbsp;
+                           </span>
                              <a mat-stroked-button [color]="getColour(level)" target="_blank"
                                 [matTooltip]="getProfile(target.profile, target.type)"
                                 [href]="getProfile(target.profile, target.type)">{{target.type}}</a>
+
                     </span>
 
                 </span>
             </span>
+                <div *ngIf="link.extension !== undefined && getParams(link.extension).length != 0"
+                     class="mat-card-content">
+                    <b>Params</b>&nbsp;{{getParams(link.extension)}}
+                </div>
             <span class="example-spacer"></span>
             <span *ngIf="link.max !== undefined || link.min !== undefined">
                   <mat-chip-list>
@@ -34,25 +43,40 @@
                       Max={{link.max}}</mat-chip>
                   </mat-chip-list>
             </span>
+                &nbsp;
+
+                <span *ngIf="expanded">
+                    <mat-icon color="accent">keyboard_arrow_up</mat-icon>
+                </span>
+                <span *ngIf="!expanded">
+                    <mat-icon color="accent">keyboard_arrow_down</mat-icon>
+                </span>
             </mat-toolbar-row>
         </mat-toolbar>
     </ng-template>
+    <td-expansion-summary>
+        <div *ngIf="link.description != undefined" >
+            <mat-card-content>
+            <td-markdown [content]="getMarkdown(link.description)">
+            </td-markdown>
+            </mat-card-content>
+        </div>
+    </td-expansion-summary>
     <mat-card-content>
 
         <div *ngIf="link.extension !== undefined && getParams(link.extension).length != 0"
              class="mat-card-content">
-            <b>Params</b>&nbsp;{{getParams(link.extension)}}</div>
-
+            <b>Params</b>&nbsp;{{getParams(link.extension)}}
+        </div>
+        <div *ngIf="link.description != undefined" class="mat-card-content">
+            <td-markdown [content]="getMarkdown(link.description)">
+            </td-markdown>
+        </div>
 
         <div *ngIf="link.sliceName !== undefined" class="mat-card-content">
             <b>Slice</b> {{link.sliceName}}
         </div>
-        <div class="mat-card-content">
-              <span *ngIf="link.description != undefined">
-                  <td-markdown [content]="getMarkdown(link.description)">
-                  </td-markdown>
-              </span>
-        </div>
+
         <span *ngIf="link.target !== undefined">
     <span *ngFor="let target of link.target">
 
@@ -67,9 +91,7 @@
 
             </div>
            <div class="mat-body-1" fxFlex="70%">
-               <span *ngIf="target.extension !== undefined && getParams(target.extension).length != 0"
-                     class="mat-card-content">
-            <b>Params</b>&nbsp;<mat-chip>{{getParams(target.extension)}}</mat-chip></span>
+
                 <span *ngIf="target.compartment != undefined">
                       <span *ngFor="let compartment of target.compartment">
                          <a mat-raised-button color="primary"> {{compartment.code}}</a>
@@ -93,7 +115,6 @@
                 <app-graph-definition-link [link]="sublink" [level]="level+1"></app-graph-definition-link>
             </div>
           </div>
-
              </span>
           </span>
     </span>

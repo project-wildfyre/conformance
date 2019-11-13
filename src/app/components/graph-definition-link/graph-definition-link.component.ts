@@ -14,6 +14,8 @@ export class GraphDefinitionLinkComponent implements OnInit {
   @Input()
   level: number;
 
+  expanded=false;
+
   constructor() { }
 
   ngOnInit() {
@@ -61,5 +63,12 @@ export class GraphDefinitionLinkComponent implements OnInit {
     markdown = markdown.replace(new RegExp('\\\\n','g'),'\n');
     //console.log(markdown);
     return markdown ;
+  }
+
+  expandedEvent() {
+    this.expanded = true;
+  }
+  collapsedEvent() {
+    this.expanded = false;
   }
 }
