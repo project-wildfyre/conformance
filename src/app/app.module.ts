@@ -49,6 +49,7 @@ import {GraphDefinitionLinkComponent} from "./components/graph-definition-link/g
 import {GraphDefinitionComponent} from "./components/graph-definition/graph-definition.component";
 import {MatChipsModule} from "@angular/material/chips";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -58,56 +59,57 @@ import {FlexLayoutModule} from "@angular/flex-layout";
       GraphDefinitionLinkComponent,
       GraphDefinitionComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserModule,
-    BrowserAnimationsModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserModule,
+        BrowserAnimationsModule,
 
-    FlexLayoutModule,
-
-
-    MatIconModule,
-    MatListModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatFormFieldModule,
-    MatTableModule,
-    MatCardModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatRadioModule,
-    MatSelectModule,
-      MatChipsModule,
+        FlexLayoutModule,
 
 
-    CovalentLayoutModule,
-    CovalentStepsModule,
-    // (optional) Additional Covalent Modules imports
-    CovalentHttpModule.forRoot(),
-    CovalentHighlightModule,
-    CovalentMarkdownModule,
-    CovalentDynamicFormsModule,
-    CovalentBaseEchartsModule,
-    CovalentTabSelectModule,
-    CovalentCommonModule,
-    CovalentFileModule,
+        MatIconModule,
+        MatListModule,
+        MatMenuModule,
+        MatSidenavModule,
+        MatFormFieldModule,
+        MatTableModule,
+        MatCardModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatChipsModule,
 
-    CovalentExpansionPanelModule,
-    CovalentJsonFormatterModule,
-    CovalentMediaModule,
-    CovalentNotificationsModule,
-    CovalentMenuModule,
-    CovalentMessageModule,
-    CovalentDialogsModule,
-    CovalentLoadingModule,
 
-    CovalentBaseEchartsModule,
-    CovalentBarEchartsModule,
-    CovalentTooltipEchartsModule,
-    CovalentSearchModule,
-    MatSortModule,
-  ],
+        CovalentLayoutModule,
+        CovalentStepsModule,
+        // (optional) Additional Covalent Modules imports
+        CovalentHttpModule.forRoot(),
+        CovalentHighlightModule,
+        CovalentMarkdownModule,
+        CovalentDynamicFormsModule,
+        CovalentBaseEchartsModule,
+        CovalentTabSelectModule,
+        CovalentCommonModule,
+        CovalentFileModule,
+
+        CovalentExpansionPanelModule,
+        CovalentJsonFormatterModule,
+        CovalentMediaModule,
+        CovalentNotificationsModule,
+        CovalentMenuModule,
+        CovalentMessageModule,
+        CovalentDialogsModule,
+        CovalentLoadingModule,
+
+        CovalentBaseEchartsModule,
+        CovalentBarEchartsModule,
+        CovalentTooltipEchartsModule,
+        CovalentSearchModule,
+        MatSortModule,
+        MatToolbarModule,
+    ],
   providers: [
     MessageService,
     {

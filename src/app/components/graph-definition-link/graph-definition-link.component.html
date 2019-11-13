@@ -1,60 +1,75 @@
-<mat-card>
-  <mat-card-content>
+<td-expansion-panel>
+    <ng-template td-expansion-panel-header>
+        <mat-toolbar >
+            <mat-toolbar-row>
+            <span *ngIf="link.target !== undefined">
+                        <span *ngFor="let target of link.target">
+                             <span *ngIf="level===0">
+                                     <a mat-raised-button target="_blank"
+                                        [matTooltip]="getProfile(target.profile, target.type)"
+                                        [href]="getProfile(target.profile, target.type)"
+                                        [color]="getColour(level)"> {{target.type}}</a>
+                             </span>
+                        </span>
+            </span>
+            <span *ngIf="level>0">
+                 <mat-chip>Path = {{link.path}}</mat-chip>
 
-  <div class="mat-card-content"
-       fxLayout
-       fxLayout.xs="column"
-       fxLayoutAlign="center"
-       fxLayoutGap="10px"
-       fxLayoutGap.xs="0">
-    <div class="mat-body-1" fxFlex="75%">
-      <b>Path</b>&nbsp;&nbsp; <mat-chip>{{link.path}}</mat-chip>
-        <div *ngIf="link.extension !== undefined && getParams(link.extension).length != 0" class="mat-card-content">
+              <span *ngIf="link.target !== undefined">
+                    <span *ngFor="let target of link.target">
+                        &nbsp;
+                             <a mat-stroked-button [color]="getColour(level)" target="_blank"
+                                [matTooltip]="getProfile(target.profile, target.type)"
+                                [href]="getProfile(target.profile, target.type)">{{target.type}}</a>
+                    </span>
+
+                </span>
+            </span>
+            <span class="example-spacer"></span>
+            <span *ngIf="link.max !== undefined || link.min !== undefined">
+                  <mat-chip-list>
+                    <mat-chip>
+                      Min={{link.min}}</mat-chip>
+                    <mat-chip>
+                      Max={{link.max}}</mat-chip>
+                  </mat-chip-list>
+            </span>
+            </mat-toolbar-row>
+        </mat-toolbar>
+    </ng-template>
+    <mat-card-content>
+
+        <div *ngIf="link.extension !== undefined && getParams(link.extension).length != 0"
+             class="mat-card-content">
             <b>Params</b>&nbsp;{{getParams(link.extension)}}</div>
-    </div>
-    <div class="mat-body-1" fxFlex="25%">
 
-      <span *ngIf="link.max !== undefined || link.min !== undefined">
-      <mat-chip-list>
-        <mat-chip>
-          Min-{{link.min}}</mat-chip>
-        <mat-chip>
-          Max-{{link.max}}</mat-chip>
-      </mat-chip-list>
-        </span>
-    </div>
-  </div>
 
-      <div *ngIf="link.sliceName !== undefined" class="mat-card-content">
-          <b>Slice</b> {{link.sliceName}}
-      </div>
-  <div class="mat-card-content">
-      <span *ngIf="link.description != undefined">
-  <td-markdown [content]="getMarkdown(link.description)">
-
-  </td-markdown> </span>
-  </div>
- <span *ngIf="link.target !== undefined">
+        <div *ngIf="link.sliceName !== undefined" class="mat-card-content">
+            <b>Slice</b> {{link.sliceName}}
+        </div>
+        <div class="mat-card-content">
+              <span *ngIf="link.description != undefined">
+                  <td-markdown [content]="getMarkdown(link.description)">
+                  </td-markdown>
+              </span>
+        </div>
+        <span *ngIf="link.target !== undefined">
     <span *ngFor="let target of link.target">
 
        <div class="mat-card-content"
             fxLayout
             fxLayout.xs="column"
             fxLayoutAlign="center"
-            fxLayoutGap="10px"
+            fxLayoutGap="0px"
             fxLayoutGap.xs="0">
          <div class="mat-body-1" fxFlex="30%">
-           <span *ngIf="level>0">
-             <a mat-stroked-button [color]="getColour(level)" target="_blank" [href]="getProfile(target.profile, target.type)">{{target.type}}</a>
-           </span>
-           <span *ngIf="level===0">
-                 <a mat-raised-button target="_blank" [href]="getProfile(target.profile, target.type)" [color]="getColour(level)"> {{target.type}}</a>
-             </span>
+
+
             </div>
            <div class="mat-body-1" fxFlex="70%">
-               <span *ngIf="target.extension !== undefined && getParams(target.extension).length != 0" class="mat-card-content">
+               <span *ngIf="target.extension !== undefined && getParams(target.extension).length != 0"
+                     class="mat-card-content">
             <b>Params</b>&nbsp;<mat-chip>{{getParams(target.extension)}}</mat-chip></span>
-             <span *ngIf="target.profile !== undefined"><b>Profile</b> {{ target.profile }}</span>
                 <span *ngIf="target.compartment != undefined">
                       <span *ngFor="let compartment of target.compartment">
                          <a mat-raised-button color="primary"> {{compartment.code}}</a>
@@ -69,7 +84,7 @@
                         fxLayout
                         fxLayout.xs="column"
                         fxLayoutAlign="center"
-                        fxLayoutGap="10px"
+                        fxLayoutGap="0px"
                         fxLayoutGap.xs="0">
             <div class="mat-body-1" fxFlex="{{getLeft()}}">
 
@@ -84,5 +99,5 @@
     </span>
  </span>
 
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+</td-expansion-panel>
