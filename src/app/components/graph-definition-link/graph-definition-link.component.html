@@ -15,7 +15,9 @@
             </span>
             <span *ngIf="level>0">
                  <mat-chip>Path = {{link.path}}</mat-chip>
-
+                <span *ngIf="link.sliceName !== undefined">
+                    <mat-chip>Slice = {{link.sliceName}}</mat-chip>
+                </span>
               <span *ngIf="link.target !== undefined">
                     <span *ngFor="let target of link.target">
                         &nbsp;
@@ -34,6 +36,7 @@
                      class="mat-card-content">
                     <b>Params</b>&nbsp;{{getParams(link.extension)}}
                 </div>
+
             <span class="example-spacer"></span>
             <span *ngIf="link.max !== undefined || link.min !== undefined">
                   <mat-chip-list>
@@ -73,9 +76,7 @@
             </td-markdown>
         </div>
 
-        <div *ngIf="link.sliceName !== undefined" class="mat-card-content">
-            <b>Slice</b> {{link.sliceName}}
-        </div>
+
 
         <span *ngIf="link.target !== undefined">
     <span *ngFor="let target of link.target">
