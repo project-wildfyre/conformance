@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  config : {
+    baseUrl: 'http://localhost:8186/ccri-fhir/STU3',
+    baseR4Url: 'http://localhost:8186/ccri-fhir/R4'
+  }
 };
 
 /*

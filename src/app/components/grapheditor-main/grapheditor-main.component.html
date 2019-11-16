@@ -1,17 +1,21 @@
 
 
 <td-layout [class]="'theme-light'">
-    <td-navigation-drawer flex sidenavTitle="Covalent">
-        <span flex></span>
-        <a>Browse</a>
-        <a>Menu</a>
+    <td-navigation-drawer flex sidenavTitle="Conformance">
+        <mat-nav-list>
+            <a mat-list-item routerLink="/graph"><mat-icon>insert_chart</mat-icon>GraphDefinition</a>
+            <a mat-list-item routerLink="/observation"><mat-icon>show_chart</mat-icon>ObservationDefinition</a>
+        </mat-nav-list>
     </td-navigation-drawer>
-    <td-layout-nav  toolbarTitle="Graph Definition" navigationRoute="/">
+    <td-layout-nav>
         <div td-toolbar-content layout="row" layout-align="start center" flex>
+            <button mat-icon-button td-menu-button tdLayoutToggle>
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span [routerLink]="['/']" class="cursor-pointer">Conformance</span>
+            <span *ngIf="router.url.startsWith('/graph')">&nbsp;- GraphDefinition</span>
             <span flex></span>
-
            </div>
-
        <router-outlet></router-outlet>
     </td-layout-nav>
 </td-layout>

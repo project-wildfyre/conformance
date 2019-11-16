@@ -3,6 +3,7 @@ import {BrowserService} from "../../services/browser.service";
 import {OperationOutcome} from "fhir-stu3";
 import {MessageService} from "../../services/message.service";
 import {IAlertConfig, TdDialogService} from "@covalent/core";
+import {Router} from "@angular/router";
 
 
 
@@ -15,6 +16,7 @@ export class GrapheditorMainComponent implements OnInit {
 
   constructor(public browserService : BrowserService,
               public messageService: MessageService,
+              public router: Router,
               private _dialogService: TdDialogService,
               private _viewContainerRef: ViewContainerRef) {
 

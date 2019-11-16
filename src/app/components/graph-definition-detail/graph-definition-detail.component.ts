@@ -131,6 +131,11 @@ export class GraphDefinitionDetailComponent implements OnInit {
     return "";
   }
 
+  getMinMax(link: GraphDefinitionLink) {
+    console.log(link);
+    return "["+link.min+".."+link.max+"]";
+  }
+
   processGraph() {
     this.nodes = [];
     this.edges = [];
@@ -155,7 +160,7 @@ export class GraphDefinitionDetailComponent implements OnInit {
               id: 'e' + f,
               source: node.id,
               target: this.getTargetId(link),
-              label: link.path
+              label: this.getMinMax(link) + " "+ link.path
             };
             if (link.sliceName != undefined) edge.label += " [slice="+link.sliceName+']';
             f++;
