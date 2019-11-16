@@ -1,108 +1,98 @@
 <span *ngIf="graph !== undefined" xmlns:svg="">
-    <mat-card>
-        <mat-card-header><h2>Graph Definition - {{graph.name}}</h2></mat-card-header>
-        <mat-card-content>
+    <td-tab-select [(ngModel)]="value"
+                   backgroundColor="accent"
+                   stretchTabs>
+      <td-tab-option [value]="'table'">Tabular</td-tab-option>
+     <td-tab-option [value]="'graph'">Graph</td-tab-option>
+    </td-tab-select>
 
 
-          <div class="mat-card-content"
-               fxLayout
-               fxLayout.xs="column"
-               fxLayoutAlign="center"
-               fxLayoutGap="10px"
-               fxLayoutGap.xs="0">
-            <div class="mat-body-1" fxFlex="50%">
-              <b>Name</b> <span *ngIf="graph.name.includes('null')"> {{graph.name}}</span>
-               <span *ngIf="!graph.name.includes('null')"> {{graph.name}}</span>
-            </div>
-            <div class="mat-body-1" fxFlex="50%">
-              <b>Url</b> &nbsp; <a class="mat-body-2" [href]="graph.url" target="_blank"> {{graph.url}}</a>
-            </div>
-          </div>
 
-             <div class="mat-card-content"
-                  fxLayout
-                  fxLayout.xs="column"
-                  fxLayoutAlign="center"
-                  fxLayoutGap="10px"
-                  fxLayoutGap.xs="0">
-            <div class="mat-body-1" fxFlex="25%">
-              <b>Version</b> {{graph.version}}
-            </div>
-            <div class="mat-body-1" fxFlex="25%">
-              <b>Status</b> {{graph.status}}
-            </div>
-                  <div class="mat-body-1"  fxFlex="25%">
-                    <b>Date</b> {{graph.date | date: 'dd-MMM-yyyy'}}
-            </div>
-            <div class="mat-body-1"  fxFlex="25%">
-              <span *ngIf="graph.experimental"><b>Experimental</b></span>
-            </div>
-          </div>
-          <div class="mat-card-content" ><b>Description</b> <td-markdown [content]="getMarkdown(graph.description)">
-              </td-markdown></div>
+    <span *ngIf="value=='table'">
+        <mat-card>
+            <mat-card-header><h2>Graph Definition - {{graph.name}}</h2></mat-card-header>
+            <mat-card-content>
 
-       <div class="mat-card-content"
-            fxLayout
-            fxLayout.xs="column"
-            fxLayoutAlign="center"
-            fxLayoutGap="10px"
-            fxLayoutGap.xs="0">
-            <div class="mat-body-1" fxFlex="50%">
-                <b>Purpose</b> <td-markdown [content]="getMarkdown(graph.purpose)"></td-markdown>
-            </div>
-            <div class="mat-body-1" fxFlex="50%">
-              <div class="mat-card-content mat-body-1" ><b>Publisher</b> {{graph.publisher}}</div>
-            </div>
-          </div>
+
+              <div class="mat-card-content"
+                   fxLayout
+                   fxLayout.xs="column"
+                   fxLayoutAlign="center"
+                   fxLayoutGap="10px"
+                   fxLayoutGap.xs="0">
+                <div class="mat-body-1" fxFlex="50%">
+                  <b>Name</b> <span *ngIf="graph.name.includes('null')"> {{graph.name}}</span>
+                   <span *ngIf="!graph.name.includes('null')"> {{graph.name}}</span>
+                </div>
+                <div class="mat-body-1" fxFlex="50%">
+                  <b>Url</b> &nbsp; <a class="mat-body-2" [href]="graph.url" target="_blank"> {{graph.url}}</a>
+                </div>
+              </div>
+
                  <div class="mat-card-content"
                       fxLayout
                       fxLayout.xs="column"
                       fxLayoutAlign="center"
                       fxLayoutGap="10px"
                       fxLayoutGap.xs="0">
-            <div class="mat-body-1" fxFlex="25%">
-                Start At &nbsp;
-                <a mat-raised-button target="_blank" [matTooltip]="getProfile(graph.profile, graph.start)" [href]="getProfile(graph.profile, graph.start)" color="info"> {{graph.start}}</a>
+                <div class="mat-body-1" fxFlex="25%">
+                  <b>Version</b> {{graph.version}}
+                </div>
+                <div class="mat-body-1" fxFlex="25%">
+                  <b>Status</b> {{graph.status}}
+                </div>
+                      <div class="mat-body-1"  fxFlex="25%">
+                        <b>Date</b> {{graph.date | date: 'dd-MMM-yyyy'}}
+                </div>
+                <div class="mat-body-1"  fxFlex="25%">
+                  <span *ngIf="graph.experimental"><b>Experimental</b></span>
+                </div>
+              </div>
+              <div class="mat-card-content" ><b>Description</b> <td-markdown [content]="getMarkdown(graph.description)">
+                  </td-markdown></div>
 
-            </div>
-            <div class="mat-body-1" fxFlex="85%">
-            <!--    <span *ngIf="graph.profile !== undefined">
-              <b>Profile</b> {{graph.profile}}
-                    </span> -->
-            </div>
-          </div>
+           <div class="mat-card-content"
+                fxLayout
+                fxLayout.xs="column"
+                fxLayoutAlign="center"
+                fxLayoutGap="10px"
+                fxLayoutGap.xs="0">
+                <div class="mat-body-1" fxFlex="50%">
+                    <b>Purpose</b> <td-markdown [content]="getMarkdown(graph.purpose)"></td-markdown>
+                </div>
+                <div class="mat-body-1" fxFlex="50%">
+                  <div class="mat-card-content mat-body-1" ><b>Publisher</b> {{graph.publisher}}</div>
+                </div>
+              </div>
+                     <div class="mat-card-content"
+                          fxLayout
+                          fxLayout.xs="column"
+                          fxLayoutAlign="center"
+                          fxLayoutGap="10px"
+                          fxLayoutGap.xs="0">
+                <div class="mat-body-1" fxFlex="25%">
+                    Start At &nbsp;
+                    <a mat-raised-button target="_blank" [matTooltip]="getProfile(graph.profile, graph.start)" [href]="getProfile(graph.profile, graph.start)" color="info"> {{graph.start}}</a>
 
-<td-tab-select [(ngModel)]="value"
-               backgroundColor="accent"
-               stretchTabs
->
-  <td-tab-option [value]="'table'">
-    Tabular
-        </td-tab-option>
-     <td-tab-option [value]="'graph'">
-    Graph
-        </td-tab-option>
-</td-tab-select>
-            <span *ngIf="value=='table'">
-                 <span *ngIf="graph.link != undefined">
-                    <span *ngFor="let link of graph.link">
+                </div>
+                <div class="mat-body-1" fxFlex="85%">
+                <!--    <span *ngIf="graph.profile !== undefined">
+                  <b>Profile</b> {{graph.profile}}
+                        </span> -->
+                </div>
+              </div>
 
-                    <div class="mat-body-1">
-                         <app-graph-definition-link [link]="link" [level]="0"></app-graph-definition-link>
-                    </div>
 
-                     </span>
-                  </span>
-            </span>
-            <span *ngIf="value=='graph'">
-              <ngx-graph
-                      [links]="edges"
-                      [nodes]="nodes">
+                     <span *ngIf="graph.link != undefined">
+                        <span *ngFor="let link of graph.link">
 
-            </ngx-graph>
-            </span>
+                        <div class="mat-body-1">
+                             <app-graph-definition-link [link]="link" [level]="0"></app-graph-definition-link>
+                        </div>
 
-        </mat-card-content>
+                         </span>
+                      </span>
+                    </mat-card-content>
 
         <mat-card-actions>
           <button mat-button placement="top" (click)="view(graph)"  color="accent"><mat-icon>code</mat-icon>
@@ -110,6 +100,50 @@
        </mat-card-actions>
 
     </mat-card>
- 
-</span>
+    </span>
+
+            <span *ngIf="value=='graph'">
+<mat-card style="width: 100%; height: 100%; box-sizing: border-box;" >
+              <ngx-graph
+                      [links]="edges"
+                      [nodes]="nodes">
+                  <ng-template #linkTemplate let-link>
+                      <svg:g class="edge">
+                          <svg:path class="line" stroke-width="2" marker-end="url(#arrow)"></svg:path>
+                          <svg:text class="edge-label" text-anchor="middle">
+                            <textPath
+                                    class="text-path"
+                                    [attr.href]="'#' + link.id"
+                                    [style.dominant-baseline]="link.dominantBaseline"
+                                    startOffset="50%"
+                            >
+                              {{link.label}}
+                            </textPath>
+                          </svg:text>
+                        </svg:g>
+                  </ng-template>
+                  <ng-template #nodeTemplate let-node>
+                       <svg:g class="node" ngx-tooltip [tooltipPlacement]="'top'" [tooltipType]="'tooltip'" [tooltipTitle]="node.id">
+                          <svg:rect
+                                  [attr.width]="node.dimension.width"
+                                  [attr.height]="node.dimension.height"
+                                  [attr.fill]="node.data.color"
+                          />
+                          <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.dimension.height / 2">
+                            {{node.label}}
+                          </svg:text>
+                        </svg:g>
+                  </ng-template>
+                  <ng-template #defsTemplate>
+                        <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
+                            <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
+                        </svg:marker>
+                    </ng-template>
+            </ngx-graph>
+</mat-card>
+            </span>
+
+
+    </span>
+
 

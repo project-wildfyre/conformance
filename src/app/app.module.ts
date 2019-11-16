@@ -54,6 +54,7 @@ import {ResourceDialogComponent} from "./dialog/resource-dialog/resource-dialog.
 import {MatDialogModule} from "@angular/material/dialog";
 import {NgxGraphModule} from "@swimlane/ngx-graph";
 import {TooltipModule} from "ngx-tooltip";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [
@@ -120,6 +121,7 @@ import {TooltipModule} from "ngx-tooltip";
         CovalentSearchModule,
 
         NgxGraphModule,
+        NgxChartsModule,
         TooltipModule
 
     ],

@@ -99,14 +99,14 @@ export class GraphDefinitionDetailComponent implements OnInit {
     if (graphLink.id != null) return graphLink.id;
     if (graphLink.target != undefined) {
       var targetId = this.getTargetId(graphLink);
-      console.log('tg '+targetId);
+    //  console.log('tg '+targetId);
       return targetId;
     }
     return this.getNodeLabel(graphLink)
   }
 
   getTargetId(graphLink : GraphDefinitionLink) : string {
-    console.log(graphLink);
+ //   console.log(graphLink);
     if (graphLink.target !== undefined) {
       for (const target of graphLink.target) {
         if (target.extension != undefined) {
@@ -140,10 +140,13 @@ export class GraphDefinitionDetailComponent implements OnInit {
 
       var node = {
         id : this.getNodeId(graphLink),
-        label : this.getNodeLabel(graphLink)
+        label : this.getNodeLabel(graphLink),
+        options : {
+          color : 'red'
+        }
       };
       this.nodes.push(node);
-      console.log("node id " + node.id);
+      //console.log("node id " + node.id);
 
       for(const target of graphLink.target) {
         if (target.link != undefined) {
@@ -154,10 +157,13 @@ export class GraphDefinitionDetailComponent implements OnInit {
               target: this.getTargetId(link),
               label: link.path
             };
+            if (link.sliceName != undefined) edge.label += " [slice="+link.sliceName+']';
             f++;
-            console.log('edge target ' + edge.target);
+           // console.log('edge target ' + edge.target);
             if (edge.target !== "") {
               this.edges.push(edge);
+            } else {
+              console.log('Node issue ' + node.id + 'edge target ' + edge.target);
             }
           }
         }
@@ -186,6 +192,8 @@ export class GraphDefinitionDetailComponent implements OnInit {
     return markdown ;
   }
 
+  changeNodeColor(node: any) {
 
+  }
 
 }

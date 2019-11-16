@@ -28,6 +28,7 @@
     "@covalent/highlight": "^2.1.1",
     "@covalent/http": "^2.1.1",
     "@covalent/markdown": "^2.1.1",
+    "@swimlane/ngx-charts": "^12.0.1",
     "@swimlane/ngx-graph": "^6.2.0",
     "echarts": "^4.4.0",
     "fhir-stu3": "^1.0.0",
