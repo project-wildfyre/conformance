@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogConfig} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
-import {GraphDefinition} from "fhir-stu3";
+import {Extension, GraphDefinition, GraphDefinitionLink} from "fhir-stu3";
 import {BrowserService} from "../../services/browser.service";
 import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";
 
@@ -18,16 +18,43 @@ export class GraphDefinitionDetailComponent implements OnInit {
 
   graph: GraphDefinition;
 
-  data = [ ];
+  value: string = 'table';
+
+  nodes = [ ];
+
+  /*
+  "[
+    {
+      id: 'first',
+      label: 'A'
+    }, {
+      id: 'second',
+      label: 'B'
+    }, {
+      id: 'third',
+      label: 'C'
+    }
+  ]"
+   */
 
   edges = [];
 
-  force = {
-    // initLayout: 'circular'
-    // gravity: 0
-    repulsion: 100,
-    edgeLength: 300
-  };
+  /*
+  [
+    {
+      id: 'a',
+      source: 'first',
+    target: 'second',
+      label: 'is parent of'
+    }, {
+      id: 'b',
+      source: 'first',
+      target: 'third',
+      label: 'custom label'
+    }
+  ]
+   */
+
 
 
   constructor(
@@ -67,68 +94,77 @@ export class GraphDefinitionDetailComponent implements OnInit {
     return 'https://www.hl7.org/fhir/stu3/' + resource.toLowerCase() + '.html';
   }
 
-  processGraph() {
-    this.data = [];
-    this.edges = [];
-    let f = 1;
+  getNodeId(graphLink : GraphDefinitionLink) : string {
 
-    this.data.push({
-      id: f.toString(3),
-      name: this.graph.start,
-      symbolSize: 50,
-      itemStyle: {normal: {color: '#c71919'}}
-    });
-    let base = f;
-    f++;
-    if (this.graph.link !== undefined) {
-      this.processItem(base, f, this.graph.link);
+    if (graphLink.id != null) return graphLink.id;
+    if (graphLink.target != undefined) {
+      var targetId = this.getTargetId(graphLink);
+      console.log('tg '+targetId);
+      return targetId;
     }
+    return this.getNodeLabel(graphLink)
   }
-  processItem(base, f, links) {
-    for (let link of links) {
-      if (link.target !== undefined) {
-        for (const target of link.target) {
 
-          this.data.push({
-            id: f.toString(),
-            name: target.type,
-            symbolSize: 50,
-            itemStyle: {normal: {color: '#4f19c7'}}
-          });
-          this.edges.push({
-            source: base.toString(),
-            target: f.toString(),
-            label: 'saz'
-          });
-
-          base = f;
-          f++;
-          if (target.compartment !== undefined) {
-            for (const compartment of target.compartment) {
-              this.data.push({
-                id: f.toString(),
-                name: compartment.code,
-                symbolSize: 50,
-                itemStyle: {normal: {color: '#c76919'}}
-              });
-              this.edges.push({
-                source: base.toString(),
-                target: f.toString(),
-                label: 'bob'
-              });
-              f++;
+  getTargetId(graphLink : GraphDefinitionLink) : string {
+    console.log(graphLink);
+    if (graphLink.target !== undefined) {
+      for (const target of graphLink.target) {
+        if (target.extension != undefined) {
+          for (const ext of target.extension) {
+            if (ext.url == 'https://fhir.mayfield-is.co.uk/extension-GraphDefinition.targetLinkId') {
+              return ext.valueString;
             }
-          }
-          if (target.link !== undefined) {
-            this.processItem(base, f, target.link);
           }
         }
       }
-
     }
-   // console.log(this.data);
-   // console.log(this.edges);
+    return "";
   }
+
+  getNodeLabel(graphLink : GraphDefinitionLink) : string {
+
+    if (graphLink.target !== undefined) {
+      for (const target of graphLink.target) {
+        if (target.type) return target.type;
+      }
+    }
+    return "";
+  }
+
+  processGraph() {
+    this.nodes = [];
+    this.edges = [];
+    let f = 1;
+
+    for(const graphLink of this.graph.link) {
+
+      var node = {
+        id : this.getNodeId(graphLink),
+        label : this.getNodeLabel(graphLink)
+      };
+      this.nodes.push(node);
+      console.log("node id " + node.id);
+
+      for(const target of graphLink.target) {
+        if (target.link != undefined) {
+          for (const link of target.link) {
+            const edge = {
+              id: 'e' + f,
+              source: node.id,
+              target: this.getTargetId(link),
+              label: link.path
+            };
+            f++;
+            console.log('edge target ' + edge.target);
+            if (edge.target !== "") {
+              this.edges.push(edge);
+            }
+          }
+        }
+      }
+    }
+  }
+
 
   view(resource) {
     const dialogConfig = new MatDialogConfig();

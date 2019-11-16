@@ -36,7 +36,7 @@
                      class="mat-card-content">
                     <b>Params</b>&nbsp;{{getParams(link.extension)}}
                 </div>
-
+            &nbsp;<mat-chip>{{getNode(link)}}</mat-chip>
             <span class="example-spacer"></span>
             <span *ngIf="link.max !== undefined || link.min !== undefined">
                   <mat-chip-list>
@@ -57,14 +57,14 @@
             </mat-toolbar-row>
         </mat-toolbar>
     </ng-template>
-    <td-expansion-summary>
+   <!-- <td-expansion-summary>
         <div *ngIf="link.description != undefined" >
             <mat-card-content>
             <td-markdown [content]="getMarkdown(link.description)">
             </td-markdown>
             </mat-card-content>
         </div>
-    </td-expansion-summary>
+    </td-expansion-summary> -->
     <mat-card-content>
 
         <div *ngIf="link.extension !== undefined && getParams(link.extension).length != 0"

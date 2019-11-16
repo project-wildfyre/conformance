@@ -50,6 +50,10 @@ import {GraphDefinitionComponent} from "./components/graph-definition/graph-defi
 import {MatChipsModule} from "@angular/material/chips";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {ResourceDialogComponent} from "./dialog/resource-dialog/resource-dialog.component";
+import {MatDialogModule} from "@angular/material/dialog";
+import {NgxGraphModule} from "@swimlane/ngx-graph";
+import {TooltipModule} from "ngx-tooltip";
 
 @NgModule({
   declarations: [
@@ -57,8 +61,13 @@ import {MatToolbarModule} from "@angular/material/toolbar";
       GrapheditorMainComponent,
       GraphDefinitionDetailComponent,
       GraphDefinitionLinkComponent,
-      GraphDefinitionComponent
+      GraphDefinitionComponent,
+      ResourceDialogComponent
   ],
+    entryComponents: [
+        ResourceDialogComponent
+
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -80,7 +89,9 @@ import {MatToolbarModule} from "@angular/material/toolbar";
         MatRadioModule,
         MatSelectModule,
         MatChipsModule,
-
+        MatSortModule,
+        MatToolbarModule,
+        MatDialogModule,
 
         CovalentLayoutModule,
         CovalentStepsModule,
@@ -107,8 +118,10 @@ import {MatToolbarModule} from "@angular/material/toolbar";
         CovalentBarEchartsModule,
         CovalentTooltipEchartsModule,
         CovalentSearchModule,
-        MatSortModule,
-        MatToolbarModule,
+
+        NgxGraphModule,
+        TooltipModule
+
     ],
   providers: [
     MessageService,

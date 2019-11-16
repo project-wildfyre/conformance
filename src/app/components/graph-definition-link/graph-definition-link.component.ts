@@ -65,6 +65,21 @@ export class GraphDefinitionLinkComponent implements OnInit {
     return markdown ;
   }
 
+  getNode(link: GraphDefinitionLink) {
+    if (link.id != undefined) return link.id;
+    if (link.target != undefined) {
+      for (const target of link.target) {
+        if (target.extension != undefined) {
+          for (const ext of target.extension) {
+            if (ext.url == 'https://fhir.mayfield-is.co.uk/extension-GraphDefinition.targetLinkId') {
+              return ext.valueString;
+            }
+          }
+        }
+      }
+    }
+  }
+
   expandedEvent() {
     this.expanded = true;
   }
