@@ -55,7 +55,6 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {NgxGraphModule} from "@swimlane/ngx-graph";
 import {TooltipModule} from "ngx-tooltip";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
-import {APP_BASE_HREF} from "@angular/common";
 import {ObservationDefinitionSummaryComponent} from "./components/observation-definition-summary/observation-definition-summary.component";
 
 @NgModule({
@@ -138,8 +137,7 @@ import {ObservationDefinitionSummaryComponent} from "./components/observation-de
       provide: HTTP_INTERCEPTORS,
       useClass: ResponseInterceptor,
       multi: true
-    },
-    {provide: APP_BASE_HREF, useValue: '/conformance/'}
+    }
   ],
   bootstrap: [AppComponent]
 })
