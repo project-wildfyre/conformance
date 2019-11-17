@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   config : {
-    baseUrl: 'http://localhost:8186/ccri-fhir/STU3',
-    baseR4Url: 'http://localhost:8186/ccri-fhir/R4'
+    baseUrl: 'https://fhir.airelogic.com/ccri-fhir/STU3',
+    baseR4Url: 'https://fhir.airelogic.com/ccri-fhir/R4'
   }
 };
 
