@@ -139,7 +139,7 @@ import {ObservationDefinitionSummaryComponent} from "./components/observation-de
       useClass: ResponseInterceptor,
       multi: true
     },
-    {provide: APP_BASE_HREF, useValue: 'conformance'}
+    {provide: APP_BASE_HREF, useValue: '/conformance/'}
   ],
   bootstrap: [AppComponent]
 })
