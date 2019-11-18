@@ -8,7 +8,14 @@ import {IntroductionComponent} from "./components/introduction/introduction.comp
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'fhir', pathMatch: 'full'},
+ // { path: '', redirectTo: 'fhir', pathMatch: 'full'},
+  {
+    path: '', component: GrapheditorMainComponent,
+
+    children : [
+      { path: '', component: IntroductionComponent}
+    ]
+  },
   {
     path: 'fhir', component: GrapheditorMainComponent,
 
