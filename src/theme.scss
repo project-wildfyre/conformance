@@ -9,7 +9,7 @@
 @import '~@covalent/highlight/highlight-theme';
 @import '~@covalent/markdown/markdown-theme';
 
-@include covalent-highlight-theme();
+
 
 // Plus imports for other components in your app.
 
@@ -37,6 +37,15 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 @include covalent-theme($theme);
 @include covalent-markdown-theme($theme);
+@include covalent-highlight-theme();
+// @include covalent-flavored-markdown-theme($theme);
+
+
+// Include covalent utility classes
+@include covalent-utilities();
+
+// Include flex layout classes
+@include covalent-layout();
 
 /* ------------------------------------------------------------------------------- */
 $foreground: map-get($theme, foreground);

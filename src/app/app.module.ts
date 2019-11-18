@@ -43,7 +43,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatRadioModule} from "@angular/material/radio";
 import {ResponseInterceptor} from "./services/response-interceptor";
 import {MessageService} from "./services/message.service";
-import {GrapheditorMainComponent} from "./components/grapheditor-main/grapheditor-main.component";
+import {GrapheditorMainComponent} from "./components/conformance-main/grapheditor-main.component";
 import {GraphDefinitionDetailComponent} from "./components/graph-definition-detail/graph-definition-detail.component";
 import {GraphDefinitionLinkComponent} from "./components/graph-definition-link/graph-definition-link.component";
 import {GraphDefinitionComponent} from "./components/graph-definition/graph-definition.component";
@@ -56,6 +56,8 @@ import {NgxGraphModule} from "@swimlane/ngx-graph";
 import {TooltipModule} from "ngx-tooltip";
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {ObservationDefinitionSummaryComponent} from "./components/observation-definition-summary/observation-definition-summary.component";
+import { IntroductionComponent } from './components/introduction/introduction.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import {ObservationDefinitionSummaryComponent} from "./components/observation-de
       GraphDefinitionLinkComponent,
       GraphDefinitionComponent,
       ResourceDialogComponent,
-      ObservationDefinitionSummaryComponent
+      ObservationDefinitionSummaryComponent,
+      IntroductionComponent
   ],
     entryComponents: [
         ResourceDialogComponent
@@ -124,7 +127,8 @@ import {ObservationDefinitionSummaryComponent} from "./components/observation-de
 
         NgxGraphModule,
         NgxChartsModule,
-        TooltipModule
+        TooltipModule,
+        MatTabsModule
 
     ],
   providers: [
