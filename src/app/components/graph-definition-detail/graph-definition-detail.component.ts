@@ -18,7 +18,7 @@ export class GraphDefinitionDetailComponent implements OnInit {
 
   graph: GraphDefinition;
 
-  value: string = 'table';
+  value: string = 'graph';
 
   nodes = [ ];
 
