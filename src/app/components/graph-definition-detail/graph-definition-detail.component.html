@@ -1,8 +1,8 @@
 <span *ngIf="graph !== undefined" xmlns:svg="">
     <mat-card style="width: 100%; height: 100%; box-sizing: border-box;" >
-         <mat-card-header><h2>Graph Definition - {{graph.name}}</h2></mat-card-header>
+        <!-- <mat-card-header></mat-card-header> -->
             <mat-card-content>
-
+<h2>Graph Definition - {{graph.name}}</h2>
     <td-tab-select [(ngModel)]="value"
                    stretchTabs>
         <td-tab-option [value]="'graph'">Diagram</td-tab-option>
