@@ -4,7 +4,7 @@
         <span *ngFor="let target of link.target">
             <b>{{target.type}}</b>
             <p></p>
-            Profile <b><a mat-button [href]="getProfile(target.profile,target.type)" target="_blank">{{getProfileName(target.profile,target.type)}}</a></b>
+            Profile <b><a mat-button color="accent" [href]="getProfile(target.profile,target.type)" target="_blank">{{getProfileName(target.profile,target.type)}}</a></b>
             <p></p>
         </span>
         <b>Description</b>
