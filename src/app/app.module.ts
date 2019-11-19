@@ -58,6 +58,9 @@ import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {ObservationDefinitionSummaryComponent} from "./components/observation-definition-summary/observation-definition-summary.component";
 import { IntroductionComponent } from './components/introduction/introduction.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import { NodeDescriptionComponent } from './dialog/node-description/node-description.component';
+import { EdgeDescriptionComponent } from './dialog/edge-description/edge-description.component';
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 @NgModule({
   declarations: [
@@ -68,10 +71,14 @@ import {MatTabsModule} from "@angular/material/tabs";
       GraphDefinitionComponent,
       ResourceDialogComponent,
       ObservationDefinitionSummaryComponent,
-      IntroductionComponent
+      IntroductionComponent,
+      NodeDescriptionComponent,
+      EdgeDescriptionComponent
   ],
     entryComponents: [
-        ResourceDialogComponent
+        ResourceDialogComponent,
+        NodeDescriptionComponent,
+        EdgeDescriptionComponent
 
     ],
     imports: [
@@ -79,6 +86,7 @@ import {MatTabsModule} from "@angular/material/tabs";
         AppRoutingModule,
         BrowserModule,
         BrowserAnimationsModule,
+        DragDropModule,
 
         FlexLayoutModule,
 

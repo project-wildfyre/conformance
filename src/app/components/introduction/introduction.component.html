@@ -15,17 +15,37 @@
 
         [http://fhir.airelogic.com/ccri-fhir/R4/metadata](http://fhir.airelogic.com/ccri-fhir/R4/metadata)
 
-        ## GraphDefinition
+        ## FHIR GraphDefinition
 
         GraphDefinition explores ways of documenting FHIR Bundles especially FHIR Messages, FHIR Documents and Operations.
+        It is not practical to profile a Bundle in the same way as resources, profiles add rules to resource and GraphDefinition adds rules to be set in the Bundles. Examples:
 
-        [GraphDefinition](graph)
+        [GraphDefinition - FHIR Document](graph/1)
 
-        ## ObservationDefinition
+        [GraphDefinition - FHIR Message](graph/2)
+
+        [GraphDefinition - FHIR Operation Response](graph/3)
+
+        ## FHIR ObservationDefinition
 
         ObservationDefinition works in conjunction with Observation profiles. It provides a simple way of defining FHIR Valuesets and units for codes.
+        This resource is part of FHIR R4 only.
 
         [ObservationDefinition](observation)
+
+        ## FHIR Questionnaire
+
+        FHIR Questionnaire defines rules on FHIR QuestionnaireResponse, like Bundles QuestionnaireResponses can't be profiled.
+        Coming soon but meanwhile a demonstration can be found here:
+
+        [Care Connect Reference Implementation](https://data.developer.nhs.uk/ccri/term/questionnaire)
+
+        ## FHIR Validation
+
+        To validate FHIR Resources using UK Care Connect profiles and UK NHS Terminology, Aire Logic have provided an online validation tool.
+
+        [Aire Logic FHIR Validation](http://fhir.airelogic.com/)
+
 ">
 
     </td-markdown>

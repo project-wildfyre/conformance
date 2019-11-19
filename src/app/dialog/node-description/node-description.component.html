@@ -1,0 +1,25 @@
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane">Resource</h1>
+    <mat-dialog-content>
+
+        <span *ngFor="let target of link.target">
+            <b>{{target.type}}</b>
+            <p></p>
+            Profile <b><a mat-button [href]="getProfile(target.profile,target.type)" target="_blank">{{getProfileName(target.profile,target.type)}}</a></b>
+            <p></p>
+        </span>
+        <b>Description</b>
+        <td-markdown [content]="link.description"></td-markdown>
+         <span *ngIf="link.max !== undefined || link.min !== undefined">
+                  <mat-chip-list>
+                    <mat-chip>
+                      Min={{link.min}}</mat-chip>
+                    <mat-chip>
+                      Max={{link.max}}</mat-chip>
+                  </mat-chip-list>
+         </span>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="accent">OK</button>
+    </mat-dialog-actions>
+

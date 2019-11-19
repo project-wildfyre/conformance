@@ -101,7 +101,7 @@
                       [links]="edges"
                       [nodes]="nodes">
                   <ng-template #linkTemplate let-link>
-                      <svg:g class="edge">
+                      <svg:g class="edge" (click)="clickEdge(link.data)" style="cursor: pointer;">
                           <svg:path class="line" stroke-width="2" marker-end="url(#arrow)"></svg:path>
                           <svg:text class="edge-label" text-anchor="middle">
                             <textPath
@@ -115,14 +115,16 @@
                         </svg:g>
                   </ng-template>
                   <ng-template #nodeTemplate let-node>
-                       <svg:g class="node" ngx-tooltip [tooltipPlacement]="'top'" [tooltipTitle]="node.id">
+                       <svg:g class="node" ngx-tooltip [tooltipPlacement]="'top'" [tooltipTitle]="node.id"
+                              (dblclick)="clickNode(node.data)"
+                                style="cursor: pointer;">
                           <svg:rect
                                   [attr.width]="node.dimension.width"
                                   [attr.height]="node.dimension.height"
                                   [attr.fill]="node.data.color"
                           />
                           <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.dimension.height / 2">
-                              {{node.label}} ({{node.id}})
+                              {{node.label}}
                           </svg:text>
                         </svg:g>
                   </ng-template>

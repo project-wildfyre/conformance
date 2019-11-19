@@ -4,6 +4,9 @@ import {ActivatedRoute} from '@angular/router';
 import {Extension, GraphDefinition, GraphDefinitionLink} from "fhir-stu3";
 import {BrowserService} from "../../services/browser.service";
 import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";
+import {MatDialogRef} from "@angular/material/dialog";
+import {NodeDescriptionComponent} from "../../dialog/node-description/node-description.component";
+import {EdgeDescriptionComponent} from "../../dialog/edge-description/edge-description.component";
 
 
 
@@ -22,38 +25,7 @@ export class GraphDefinitionDetailComponent implements OnInit {
 
   nodes = [ ];
 
-  /*
-  "[
-    {
-      id: 'first',
-      label: 'A'
-    }, {
-      id: 'second',
-      label: 'B'
-    }, {
-      id: 'third',
-      label: 'C'
-    }
-  ]"
-   */
-
   edges = [];
-
-  /*
-  [
-    {
-      id: 'a',
-      source: 'first',
-    target: 'second',
-      label: 'is parent of'
-    }, {
-      id: 'b',
-      source: 'first',
-      target: 'third',
-      label: 'custom label'
-    }
-  ]
-   */
 
 
 
@@ -105,6 +77,32 @@ export class GraphDefinitionDetailComponent implements OnInit {
     return this.getNodeLabel(graphLink)
   }
 
+  clickNode(link) {
+    if (link.isEmpty) return;
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = false;
+    dialogConfig.width = "400px";
+    dialogConfig.data = {
+      link: link
+    };
+    const resourceDialog: MatDialogRef<NodeDescriptionComponent> = this.dialog.open( NodeDescriptionComponent, dialogConfig);
+  }
+
+  clickEdge(link) {
+    if (link.isEmpty) return;
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = false;
+    dialogConfig.width = "400px";
+    dialogConfig.data = {
+      link: link
+    };
+    const resourceDialog: MatDialogRef<EdgeDescriptionComponent> = this.dialog.open( EdgeDescriptionComponent, dialogConfig);
+  }
+
   getTargetId(graphLink : GraphDefinitionLink) : string {
  //   console.log(graphLink);
     if (graphLink.target !== undefined) {
@@ -132,7 +130,7 @@ export class GraphDefinitionDetailComponent implements OnInit {
   }
 
   getMinMax(link: GraphDefinitionLink) {
-    console.log(link);
+  //  console.log(link);
     return "["+link.min+".."+link.max+"]";
   }
 
@@ -143,15 +141,23 @@ export class GraphDefinitionDetailComponent implements OnInit {
 
     for(const graphLink of this.graph.link) {
 
+      var htmlLink = "";
+      if (graphLink.target !== undefined) {
+        for (const target of graphLink.target) {
+          htmlLink = this.getProfile(target.profile, target.type)
+        }
+      }
+
       var node = {
         id : this.getNodeId(graphLink),
         label : this.getNodeLabel(graphLink),
+        description : graphLink.description,
+        data : graphLink,
         options : {
           color : 'red'
         }
       };
       this.nodes.push(node);
-      //console.log("node id " + node.id);
 
       for(const target of graphLink.target) {
         if (target.link != undefined) {
@@ -159,6 +165,7 @@ export class GraphDefinitionDetailComponent implements OnInit {
             const edge = {
               id: 'e' + f,
               source: node.id,
+              data: link,
               target: this.getTargetId(link),
               label: this.getMinMax(link) + " "+ link.path
             };
@@ -197,8 +204,6 @@ export class GraphDefinitionDetailComponent implements OnInit {
     return markdown ;
   }
 
-  changeNodeColor(node: any) {
 
-  }
 
 }

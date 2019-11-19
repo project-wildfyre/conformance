@@ -1,0 +1,30 @@
+<h1 mat-dialog-title cdkDrag cdkDragRootElement=".cdk-overlay-pane">Reference</h1>
+<mat-dialog-content>
+
+    <mat-chip>Path = {{link.path}}</mat-chip><p></p>
+   <span *ngIf="link.sliceName !== undefined">
+       <mat-chip>Slice = {{link.sliceName}}</mat-chip>
+       <p></p>
+    </span>
+    <span *ngIf="link.target !== undefined">
+        <span *ngFor="let target of link.target">
+             <span *ngIf="target.extension !== undefined && getParams(target.extension).length != 0">
+                    <mat-chip>Params = {{getParams(target.extension)}}</mat-chip><p></p>
+               </span>
+        </span>
+    </span>
+    <b>Description</b>
+    <td-markdown [content]="link.description"></td-markdown>
+    <span *ngIf="link.max !== undefined || link.min !== undefined">
+                  <mat-chip-list>
+                    <mat-chip>
+                      Min={{link.min}}</mat-chip>
+                    <mat-chip>
+                      Max={{link.max}}</mat-chip>
+                  </mat-chip-list>
+         </span>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="accent">OK</button>
+</mat-dialog-actions>
