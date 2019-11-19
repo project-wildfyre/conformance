@@ -47,6 +47,15 @@ export class GraphDefinitionLinkComponent implements OnInit {
     return 'https://www.hl7.org/fhir/stu3/' + resource.toLowerCase() + '.html';
   }
 
+  getProfileName(profile: string, resource: string) {
+    var profile = this.getProfile(profile,resource);
+    if (profile == '') return '';
+    if (profile.includes('.html')) return resource;
+    var parts = profile.split('/');
+    return parts[parts.length-1];
+
+  }
+
   getParams(events : Extension[]) {
     for (const extension of events) {
       if (extension.url == 'http://hl7.org/fhir/4.0/StructureDefinition/extension-GraphDefinition.link.target.params' ) {

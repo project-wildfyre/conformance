@@ -61,6 +61,10 @@ import {MatTabsModule} from "@angular/material/tabs";
 import { NodeDescriptionComponent } from './dialog/node-description/node-description.component';
 import { EdgeDescriptionComponent } from './dialog/edge-description/edge-description.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {QuestionnaireComponent} from "./components/questionnaire-detail/questionnaire.component";
+import {QuestionnaireItemComponent} from "./components/questionnaire-item/questionnaire-item.component";
+import {QuestionnaireItemOptionComponent} from "./components/questionnaire-item-option/questionnaire-item-option.component";
+import {QuestionnaireSummaryComponent} from "./components/questionnaire/questionnaire-summary.component";
 
 @NgModule({
   declarations: [
@@ -73,7 +77,11 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
       ObservationDefinitionSummaryComponent,
       IntroductionComponent,
       NodeDescriptionComponent,
-      EdgeDescriptionComponent
+      EdgeDescriptionComponent,
+      QuestionnaireComponent,
+      QuestionnaireSummaryComponent,
+      QuestionnaireItemComponent,
+      QuestionnaireItemOptionComponent
   ],
     entryComponents: [
         ResourceDialogComponent,

@@ -65,7 +65,14 @@ export class GraphDefinitionDetailComponent implements OnInit {
     if (profile !== undefined) return profile;
     return 'https://www.hl7.org/fhir/stu3/' + resource.toLowerCase() + '.html';
   }
+  getProfileName(profile: string, resource: string) {
+    var profile = this.getProfile(profile,resource);
+    if (profile == '') return '';
+    if (profile.includes('.html')) return resource;
+    var parts = profile.split('/');
+    return parts[parts.length-1];
 
+  }
   getNodeId(graphLink : GraphDefinitionLink) : string {
 
     if (graphLink.id != null) return graphLink.id;

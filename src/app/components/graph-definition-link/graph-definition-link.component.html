@@ -7,7 +7,7 @@
                         <span *ngFor="let target of link.target">
                              <span *ngIf="level===0">
                                      <a mat-button target="_blank"
-                                        [matTooltip]="getProfile(target.profile, target.type)"
+                                        [matTooltip]="getProfileName(target.profile, target.type)"
                                         [href]="getProfile(target.profile, target.type)"
                                         [color]="getColour(level)"> {{target.type}}</a>
                              </span>
@@ -25,7 +25,7 @@
                                 <mat-chip>Params = {{getParams(target.extension)}}</mat-chip> &nbsp;
                            </span>
                              <a mat-stroked-button [color]="getColour(level)" target="_blank"
-                                [matTooltip]="getProfile(target.profile, target.type)"
+                                [matTooltip]="getProfileName(target.profile, target.type)"
                                 [href]="getProfile(target.profile, target.type)">{{target.type}}</a>
 
                     </span>
