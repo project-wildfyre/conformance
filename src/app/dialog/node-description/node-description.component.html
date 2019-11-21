@@ -8,7 +8,7 @@
             <p></p>
         </span>
         <b>Description</b>
-        <td-markdown [content]="link.description"></td-markdown>
+        <td-markdown [content]="getMarkdown(link.description)"></td-markdown>
          <span *ngIf="link.max !== undefined || link.min !== undefined">
                   <mat-chip-list>
                     <mat-chip>

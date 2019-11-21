@@ -42,4 +42,12 @@ export class EdgeDescriptionComponent implements OnInit {
 
     return "";
   }
+
+  getMarkdown(markdown: string): string {
+    //console.log(markdown);
+    if (markdown === undefined) return undefined;
+    markdown = markdown.replace(new RegExp('\\\\n','g'),'\n');
+    //console.log(markdown);
+    return markdown ;
+  }
 }
